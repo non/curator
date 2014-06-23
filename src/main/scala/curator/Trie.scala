@@ -4,6 +4,9 @@ import scala.collection.mutable
 import scala.reflect.ClassTag
 
 object Trie {
+  def apply[C, V](m: Iterable[(IndexedSeq[C], V)]): Trie[C, V] =
+    m.foldLeft(Trie.empty[C, V]) { case (t, (k, v)) => t.set(k, v) }
+
   def empty[C, V]: Trie[C, V] = Trie(Map.empty, None)
 
   def ofKeys[C, V](m: Iterable[(IndexedSeq[C], V)]): Trie[C, V] =
